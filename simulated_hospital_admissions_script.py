@@ -53,12 +53,15 @@ def get_insurance(age):
 def generate_notes(condition, outcome):
     templates = [
         "Patient treated for {condition}. Discharge outcome: {outcome}.",
-        "Clinical course involved {condition}; patient was {outcome.lower()}.",
+        "Clinical course involved {condition}; patient was {outcome_lower}.",
         "{condition} managed during admission; status: {outcome}.",
         "{outcome} following treatment for {condition}.",
         "Patient case: {condition}. Final status: {outcome}."
     ]
-    return random.choice(templates).format(condition=condition, outcome=outcome)
+    outcome_lower = outcome.lower()
+    return random.choice(templates).format(
+        condition=condition, outcome=outcome, outcome_lower=outcome_lower
+    )
 
 # Dataset generator
 def generate_patient_dataset(n=500, seed=42):
@@ -97,4 +100,4 @@ def generate_patient_dataset(n=500, seed=42):
 
 # Example usage:
 df = generate_patient_dataset()
-df.to_csv("improved_hospital_patient_dataset.csv", index=False)
+df.to_csv("simulated_hospital_admissions.csv", index=False)
